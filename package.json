@@ -1,0 +1,51 @@
+{
+  "name": "phishguard-labs",
+  "version": "1.0.0",
+  "description": "Desktop lab for phishing analysis, risk scoring, SOC-style case history and cybersecurity portfolio demos.",
+  "author": "Martín González",
+  "private": true,
+  "main": "electron/main.cjs",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on tcp:5173 && electron .\"",
+    "start": "npm run dev",
+    "build": "vite build",
+    "dist": "npm run build && electron-builder",
+    "preview": "vite preview --host 127.0.0.1",
+    "lint:quick": "node scripts/quick-check.cjs"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "electron": "latest",
+    "electron-builder": "latest",
+    "concurrently": "latest",
+    "wait-on": "latest"
+  },
+  "devDependencies": {},
+  "build": {
+    "appId": "com.portfolio.phishguardlabs",
+    "productName": "PhishGuard Labs",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.developer-tools"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage",
+      "category": "Utility"
+    }
+  }
+}
